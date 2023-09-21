@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// Repository
+class UserRepository {
+  Future<User> getUserProfile() async {
+    // Simulate fetching user profile data from a remote API or database.
+    await Future.delayed(const Duration(seconds: 2));
+    return User(
+      name: "NSS",
+      profilePictureUrl: "http://example.com/nss.jpg",
+      bio: "Hi, NSS here.",
+    );
+  }
+
+  Future<void> updateUserProfile(
+      String name, String profilePictureUrl, String bio) async {
+    // Simulate updating user profile data in a remote API or database.
+    await Future.delayed(const Duration(seconds: 2));
+  }
+}
+
 // Model
 class User {
   final String name;
@@ -12,6 +31,28 @@ class User {
     required this.profilePictureUrl,
     required this.bio,
   });
+}
+
+// Presenter
+class UserPresenter with ChangeNotifier {
+  final UserRepository userRepository;
+  User? user;
+
+  UserPresenter({
+    required this.userRepository,
+  });
+
+  Future<void> getUserProfile() async {
+    user = await userRepository.getUserProfile();
+    notifyListeners(); // Notify listeners to update the UI
+  }
+
+  Future<void> updateUserProfile(
+      String name, String profilePictureUrl, String bio) async {
+    await userRepository.updateUserProfile(name, profilePictureUrl, bio);
+    user = User(name: name, profilePictureUrl: profilePictureUrl, bio: bio);
+    notifyListeners(); // Notify listeners to update the UI
+  }
 }
 
 // View
@@ -58,47 +99,6 @@ class UserProfileView extends StatelessWidget {
         child: const Icon(Icons.replay_outlined),
       ),
     );
-  }
-}
-
-// Presenter
-class UserPresenter with ChangeNotifier {
-  final UserRepository userRepository;
-  User? user;
-
-  UserPresenter({
-    required this.userRepository,
-  });
-
-  Future<void> getUserProfile() async {
-    user = await userRepository.getUserProfile();
-    notifyListeners(); // Notify listeners to update the UI
-  }
-
-  Future<void> updateUserProfile(
-      String name, String profilePictureUrl, String bio) async {
-    await userRepository.updateUserProfile(name, profilePictureUrl, bio);
-    user = User(name: name, profilePictureUrl: profilePictureUrl, bio: bio);
-    notifyListeners(); // Notify listeners to update the UI
-  }
-}
-
-// Repository
-class UserRepository {
-  Future<User> getUserProfile() async {
-    // Simulate fetching user profile data from a remote API or database.
-    await Future.delayed(const Duration(seconds: 2));
-    return User(
-      name: "NSS",
-      profilePictureUrl: "http://example.com/nss.jpg",
-      bio: "Hi, NSS here.",
-    );
-  }
-
-  Future<void> updateUserProfile(
-      String name, String profilePictureUrl, String bio) async {
-    // Simulate updating user profile data in a remote API or database.
-    await Future.delayed(const Duration(seconds: 2));
   }
 }
 

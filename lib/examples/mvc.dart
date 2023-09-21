@@ -5,12 +5,18 @@ class Todo {
   final String title;
   bool isCompleted;
 
-  Todo({required this.title, required this.isCompleted});
+  Todo({
+    required this.title,
+    required this.isCompleted,
+  });
 }
 
 // View
 class TodoView extends StatefulWidget {
-  const TodoView({Key? key, required this.controller}) : super(key: key);
+  const TodoView({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   final TodoController controller;
 

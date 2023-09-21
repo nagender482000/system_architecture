@@ -6,12 +6,17 @@ class User {
   final String id;
   final String name;
 
-  User({required this.id, required this.name});
+  User({
+    required this.id,
+    required this.name,
+  });
 }
 
 // user_data_source.dart
 abstract class UserDataSource {
-  Future<User> getUser(String userId);
+  Future<User> getUser(
+    String userId,
+  );
 }
 
 class ApiUserDataSource implements UserDataSource {
@@ -27,7 +32,9 @@ class ApiUserDataSource implements UserDataSource {
 class UserRepository {
   final UserDataSource userDataSource;
 
-  UserRepository({required this.userDataSource});
+  UserRepository({
+    required this.userDataSource,
+  });
 
   Future<User> getUser(String userId) {
     return userDataSource.getUser(userId);
@@ -40,7 +47,9 @@ class UserRepository {
 class GetUserUseCase {
   final UserRepository userRepository;
 
-  GetUserUseCase({required this.userRepository});
+  GetUserUseCase({
+    required this.userRepository,
+  });
 
   Future<User> getUser(String userId) {
     return userRepository.getUser(userId);
@@ -51,7 +60,9 @@ class GetUserUseCase {
 class UserViewModel extends ChangeNotifier {
   final GetUserUseCase getUserUseCase;
 
-  UserViewModel({required this.getUserUseCase});
+  UserViewModel({
+    required this.getUserUseCase,
+  });
 
   User? _user;
   User? get user => _user;

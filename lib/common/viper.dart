@@ -25,7 +25,10 @@ class UserRepository {
 class UserScreen extends StatelessWidget {
   final String userId;
 
-  const UserScreen({super.key, required this.userId});
+  const UserScreen({
+    super.key,
+    required this.userId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,9 @@ class UserScreen extends StatelessWidget {
 class UserInteractor {
   final UserRepository userRepository;
 
-  UserInteractor({required this.userRepository});
+  UserInteractor({
+    required this.userRepository,
+  });
 
   Future<User> fetchUser(String userId) async {
     return userRepository.getUser(userId);
@@ -67,7 +72,9 @@ class UserPresenter with ChangeNotifier {
   User? _user;
   User? get user => _user;
 
-  UserPresenter({required this.userInteractor});
+  UserPresenter({
+    required this.userInteractor,
+  });
 
   void fetchUser(String userId) async {
     final user = await userInteractor.fetchUser(userId);

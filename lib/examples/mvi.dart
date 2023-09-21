@@ -5,14 +5,19 @@ import 'package:provider/provider.dart';
 class ChatState {
   final List<ChatMessage> messages;
 
-  ChatState({required this.messages});
+  ChatState({
+    required this.messages,
+  });
 }
 
 class ChatMessage {
   final String sender;
   final String message;
 
-  ChatMessage({required this.sender, required this.message});
+  ChatMessage({
+    required this.sender,
+    required this.message,
+  });
 }
 
 // View
@@ -58,7 +63,9 @@ class ChatView extends StatelessWidget {
 class SendChatMessageIntent {
   final String message;
 
-  SendChatMessageIntent({required this.message});
+  SendChatMessageIntent({
+    required this.message,
+  });
 }
 
 // Store

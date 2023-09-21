@@ -22,7 +22,9 @@ class UserDataSource {
 class UserRepository {
   final UserDataSource userDataSource;
 
-  UserRepository({required this.userDataSource});
+  UserRepository({
+    required this.userDataSource,
+  });
 
   Future<User> getUser(String userId) {
     return userDataSource.getUser(userId);

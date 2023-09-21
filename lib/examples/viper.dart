@@ -7,7 +7,11 @@ class Product {
   final String name;
   final double price;
 
-  Product({required this.id, required this.name, required this.price});
+  Product({
+    required this.id,
+    required this.name,
+    required this.price,
+  });
 }
 
 // View
@@ -87,6 +91,7 @@ class ProductCatalogPresenter with ChangeNotifier {
 
   void addToCart(Product product) {
     interactor.addToCart(product);
+    notifyListeners();
   }
 
   void navigateToCart() {
@@ -108,10 +113,6 @@ class ProductRepository {
 
 // Router
 class ProductCatalogRouter {
-  final ProductCatalogInteractor interactor;
-
-  ProductCatalogRouter({required this.interactor});
-
   void navigateToCart() {
     // TODO: Implement this method to navigate to the cart screen.
   }
@@ -126,11 +127,7 @@ void main() {
             interactor: ProductCatalogInteractor(
               repository: ProductRepository(),
             ),
-            router: ProductCatalogRouter(
-              interactor: ProductCatalogInteractor(
-                repository: ProductRepository(),
-              ),
-            ),
+            router: ProductCatalogRouter(),
           ),
         ),
         FutureProvider<List<Product>>(

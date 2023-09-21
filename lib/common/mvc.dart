@@ -5,7 +5,10 @@ class User {
   final String id;
   final String name;
 
-  User({required this.id, required this.name});
+  User({
+    required this.id,
+    required this.name,
+  });
 }
 
 // user_data_source.dart
